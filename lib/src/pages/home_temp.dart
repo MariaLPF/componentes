@@ -20,12 +20,12 @@ class HomePageTemp extends StatelessWidget {
     List<Widget> result = new List<Widget>();
     for (var item in options) {
       result..add(ListTile(
-            title: Text(item),
-          ))
-        ..add(Divider(
-        height: 15,
-        color: Color.fromARGB(255, 255, 0, 0),
-      ));
+                   title: Text(item),
+                  ))
+            ..add(Divider(
+                    height: 15,
+                    color: Color.fromARGB(255, 255, 0, 0),
+                  ));
     }
     return result;
   }
