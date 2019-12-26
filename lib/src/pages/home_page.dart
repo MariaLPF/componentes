@@ -35,9 +35,7 @@ class HomePage extends StatelessWidget {
         trailing: Icon(Icons.keyboard_arrow_right),
         onTap: (){
           final route = MaterialPageRoute(
-            builder: (context){
-              return AlertPage();
-            }
+            builder: (context)=> AlertPage()
           );
           Navigator.push(context, route);
         },
@@ -45,14 +43,8 @@ class HomePage extends StatelessWidget {
     });
 
     return items;
-    /* return [
-      ListTile(title: Text('Hola Mundo')),
-      Divider(),
-      ListTile(title: Text('Hola Mundo')),
-      Divider(),
-      ListTile(title: Text('Hola Mundo')),
-      Divider(),
-      ListTile(title: Text('Hola Mundo')),
-    ];*/
+    
   }
+
+  
 }
