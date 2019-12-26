@@ -37,7 +37,8 @@ class HomePage extends StatelessWidget {
           final route = MaterialPageRoute(
             builder: (context)=> AlertPage()
           );
-          Navigator.push(context, route);
+          Navigator.pushNamed(context, opt['ruta']);
+         // Navigator.push(context, route);
         },
       ));
     });
