@@ -16,6 +16,8 @@ class CardPage extends StatelessWidget {
 
   Widget _cardType1() {
     return Card(
+      elevation: 10.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -46,26 +48,43 @@ class CardPage extends StatelessWidget {
   }
 
   Widget _cardType2() {
-    return Card(
+    final card = Container(
       child: Column(
-        children: <Widget>[
+          children: <Widget>[
           /*Image(
             image: NetworkImage(
                 'https://upload.wikimedia.org/wikipedia/commons/7/78/Frosty_Raftsundet_landscape_with_Trolltindan_in_morning%2C_2012_October.JPG'),
           ),*/
           FadeInImage(
-            fadeInDuration: Duration(milliseconds: 200) ,
+            fadeInDuration: Duration(milliseconds: 200),
             placeholder: AssetImage('assets/jar-loading.gif'),
             image: NetworkImage(
                 'https://upload.wikimedia.org/wikipedia/commons/7/78/Frosty_Raftsundet_landscape_with_Trolltindan_in_morning%2C_2012_October.JPG'),
             height: 300.0,
             fit: BoxFit.cover,
           ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            child: Text('Paisaje')
-          )
+          Container(padding: EdgeInsets.all(10.0), child: Text('Paisaje'))
         ],
+      ),
+    );
+
+    return Container(
+      
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30.0), 
+          color:Colors.white,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10.0,
+              spreadRadius: 2.0,
+              offset: Offset(2.0, 10.0)
+            )
+          ]
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(30.0),
+        child: card,
       ),
     );
   }
