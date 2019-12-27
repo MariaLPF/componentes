@@ -49,9 +49,17 @@ class CardPage extends StatelessWidget {
     return Card(
       child: Column(
         children: <Widget>[
-          Image(
+          /*Image(
             image: NetworkImage(
                 'https://upload.wikimedia.org/wikipedia/commons/7/78/Frosty_Raftsundet_landscape_with_Trolltindan_in_morning%2C_2012_October.JPG'),
+          ),*/
+          FadeInImage(
+            fadeInDuration: Duration(milliseconds: 200) ,
+            placeholder: AssetImage('assets/jar-loading.gif'),
+            image: NetworkImage(
+                'https://upload.wikimedia.org/wikipedia/commons/7/78/Frosty_Raftsundet_landscape_with_Trolltindan_in_morning%2C_2012_October.JPG'),
+            height: 300.0,
+            fit: BoxFit.cover,
           ),
           Container(
             padding: EdgeInsets.all(10.0),
