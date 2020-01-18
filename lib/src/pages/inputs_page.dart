@@ -11,6 +11,8 @@ class _InputsPageState extends State<InputsPage> {
   String _name ='';
   String _email = '';
   String _date = '';
+  List<String> _powers = ['Volar', 'Rayos X', 'Super aliento', 'Super fuerza'];
+  String _optionSelect = 'Volar';
 
   TextEditingController _inputController = new TextEditingController();
 
@@ -30,6 +32,8 @@ class _InputsPageState extends State<InputsPage> {
           _createPassword(),
           Divider(),
           _createDate(context),
+          Divider(),
+          _createDropDown(),
           Divider(),
           _createPerson(),
         ],
@@ -61,72 +65,65 @@ class _InputsPageState extends State<InputsPage> {
     );
   }
 
- Widget  _createEmail() {
-    return TextField(
-      keyboardType:TextInputType.emailAddress,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20.0)
+  Widget  _createEmail() {
+      return TextField(
+        keyboardType:TextInputType.emailAddress,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0)
+          ),
+          hintText:'Escribe un email',
+          labelText: 'Email',
+          suffixIcon: Icon(Icons.alternate_email),
+          icon: Icon(Icons.email)
         ),
-        hintText:'Escribe un email',
-        labelText: 'Email',
-        suffixIcon: Icon(Icons.alternate_email),
-        icon: Icon(Icons.email)
-      ),
-      onChanged: (valor) => setState(() {
-          _email = valor;
-      })
+        onChanged: (valor) => setState(() {
+            _email = valor;
+        })
+          
         
-      
-    );
- }
+      );
+  }
 
- Widget  _createPassword() {
-    return TextField(
-      obscureText: true,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20.0)
+  Widget  _createPassword() {
+      return TextField(
+        obscureText: true,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0)
+          ),
+          
+          hintText:'Password',
+          labelText: 'Password',
+          suffixIcon: Icon(Icons.lock),
+          icon: Icon(Icons.lock)
         ),
-        
-        hintText:'Password',
-        labelText: 'Password',
-        suffixIcon: Icon(Icons.lock),
-        icon: Icon(Icons.lock)
-       ),
-      onChanged: (valor) => setState(() {
-          _email = valor;
-      })
-    );
- }
+        onChanged: (valor) => setState(() {
+            _email = valor;
+        })
+      );
+  }
 
- Widget _createDate(BuildContext context) {
-    return TextField(
-      enableInteractiveSelection: false,
-      controller: _inputController,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20.0)
+  Widget _createDate(BuildContext context) {
+      return TextField(
+        enableInteractiveSelection: false,
+        controller: _inputController,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0)
+          ),
+          
+          hintText:'Fecha de nacimiento',
+          labelText: 'Fecha de nacimiento',
+          suffixIcon: Icon(Icons.perm_contact_calendar),
+          icon: Icon(Icons.calendar_today)
         ),
-        
-        hintText:'Fecha de nacimiento',
-        labelText: 'Fecha de nacimiento',
-        suffixIcon: Icon(Icons.perm_contact_calendar),
-        icon: Icon(Icons.calendar_today)
-       ),
-      onTap: (){
-        //Quita el foco del widget
-        FocusScope.of(context).requestFocus(new FocusNode());
-        _selectDate(context);
-      },
-    );
- }
-
-  Widget _createPerson(){
-    return ListTile(
-      title: Text('Nombre es $_name'),
-      subtitle: Text('Email $_email'),
-    );
+        onTap: (){
+          //Quita el foco del widget
+          FocusScope.of(context).requestFocus(new FocusNode());
+          _selectDate(context);
+        },
+      );
   }
 
   void _selectDate(BuildContext contex) async {
@@ -145,6 +142,56 @@ class _InputsPageState extends State<InputsPage> {
       });
     }
   }
+  
+  List<DropdownMenuItem<String>> _getOptionsDropDown(){
+    List<DropdownMenuItem<String>> result = new List();
+    _powers.forEach((poder){
+      result.add(DropdownMenuItem(
+        value: poder,
+        child: Text(poder),
+       )
+      );
+    });
+    return result;
+  }
+
+  Widget _createDropDown(){
+    return Row(
+      children: <Widget>[
+        Icon(Icons.select_all),
+        SizedBox(width: 30.0),
+        Expanded(
+          
+          child: DropdownButton(
+                isExpanded: true,
+                value: _optionSelect,
+                items: _getOptionsDropDown(),
+                onChanged: (itemSelect){
+                  setState(() {
+                    _optionSelect = itemSelect;
+                  });
+                },
+              ),
+        ),
+      ],
+    );
+    
+    
+    
+    
+  }
+
+  Widget _createPerson(){
+    return ListTile(
+      title: Text('Nombre es $_name'),
+      subtitle: Text('Email $_email'),
+      trailing: Text(_optionSelect),
+    );
+  }
+  
+  
+  
+
 
 
 }
