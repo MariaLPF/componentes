@@ -7,7 +7,7 @@ class SliderPage extends StatefulWidget {
 
 class _SliderPageState extends State<SliderPage> {
 
-  double _valorSlider = 10.0;
+  double _valorSlider = 100.0;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,10 @@ class _SliderPageState extends State<SliderPage> {
         padding: EdgeInsets.only(top: 50.0),
         child: Column(
           children: <Widget>[
-            _createSlider()
+            _createSlider(),
+            Expanded(
+              child: _createImage()
+            )
           ],
         ),
       ),
@@ -31,7 +34,7 @@ class _SliderPageState extends State<SliderPage> {
     return Slider(
       activeColor:Colors.indigoAccent,
       label:'Tamaño de la imagen',
-      divisions: 20,
+   // divisions: 20,
       value: _valorSlider,
       min: 10.0,
       max: 400.0,
@@ -44,5 +47,13 @@ class _SliderPageState extends State<SliderPage> {
 
     );
 
+  }
+
+  Widget _createImage(){
+    return Image(
+        image: NetworkImage('https://qph.fs.quoracdn.net/main-qimg-19d63539771b0676c514755586b5719e'),
+        width: _valorSlider,
+        fit: BoxFit.contain,
+    );
   }
 }
