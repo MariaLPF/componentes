@@ -54,18 +54,31 @@ class _ListViewPageState extends State<ListViewPage> {
   }
 
   Widget _createList(){
-    return ListView.builder(
-      itemCount: _items.length,
-      itemBuilder: (BuildContext context, int index){
-        int _image = _items[index];
+    return RefreshIndicator(
+      onRefresh: getPagine1, //Se pasa la referencia al método
+      child: ListView.builder(
+        controller: _scrollController,
+        itemCount: _items.length,
+        itemBuilder: (BuildContext context, int index){
+          int _image = _items[index];
 
-        return FadeInImage(
-          image: NetworkImage('https://i.picsum.photos/id/$_image/500/300.jpg'),
-          placeholder: AssetImage('assets/jar-loading.gif'),
-        );
-      },
-      controller: _scrollController,
+          return FadeInImage(
+            image: NetworkImage('https://i.picsum.photos/id/$_image/500/300.jpg'),
+            placeholder: AssetImage('assets/jar-loading.gif'),
+          );
+        },
+      ),
+      
     );
+  }
+  Future<Null> getPagine1(){
+    final duration = new Duration(seconds: 2);
+    new Timer(duration, (){
+      _items.clear();
+      _lastItem++;
+      _addItems(10);
+    });
+    return Future.delayed(duration);
   }
 
   void _addItems( int amount){
